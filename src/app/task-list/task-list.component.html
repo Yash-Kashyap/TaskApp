@@ -1,0 +1,79 @@
+<header>
+  <div class="header-left">
+    <!-- <img src="logo.png" alt="Private Circle Logo" class="logo"> -->
+    <select>
+      <option>Companies</option>
+    </select>
+  </div>
+  <nav>
+    <ul>
+      <li>DASHBOARD</li>
+      <li>COMPANIES</li>
+      <li>FUNDS</li>
+      <li>HNIs</li>
+      <li>MESSAGING</li>
+      <li>MEETINGS</li>
+      <li>NOTES</li>
+      <li>DOCUMENTS</li>
+    </ul>
+  </nav>
+  <div class="header-right">
+    <div class="user-info">
+      <span>Firstname Lastname</span>
+      <span>Company Name Private Limited</span>
+    </div>
+    <div class="notifications">
+      <span class="notification-icon"></span>
+      <span class="notification-icon"></span>
+    </div>
+  </div>
+</header>
+<main>
+  <section class="sales-log">
+    <div class="log-header">
+      <h3>SALES LOG</h3>
+      <button class="new-task" (click)="openModal()">
+         New Task
+      </button>
+      <app-task-form
+        *ngIf="isModalVisible"
+        (closed)="onModalClosed($event)"
+      ></app-task-form>
+      <input type="text" placeholder="Search" />
+    </div>
+    <div *ngIf="isBrowser" style="width: 100%; height: 100%">
+      <ag-grid-angular
+        style="width: 100%; height: 500px"
+        class="ag-theme-alpine"
+        [rowData]="rowData"
+        [columnDefs]="columnDefs"
+        (gridReady)="onGridReady($event)"
+      >
+      </ag-grid-angular>
+    </div>
+    <!-- <table>
+      <thead>
+        <tr>
+          <th>Date <img src="filter.png" alt="" class="filter" /></th>
+          <th>Entity Name <img src="filter.png" alt="" class="filter" /></th>
+          <th>Task Type <img src="filter.png" alt="" class="filter" /></th>
+          <th>Time <img src="filter.png" alt="" class="filter" /></th>
+          <th>Contact Person <img src="filter.png" alt="" class="filter" /></th>
+          <th>Notes <img src="filter.png" alt="" class="filter" /></th>
+          <th>Status <img src="filter.png" alt="" class="filter" /></th>
+        </tr>
+      </thead>
+      <tbody id="sales-log-entries">
+        <tr *ngFor="let task of tasks">
+          <td>{{ task.date }}</td>
+          <td>{{ task.entityName }}</td>
+          <td>{{ task.taskType }}</td>
+          <td>{{ task.time }}</td>
+          <td>{{ task.contactPerson }}</td>
+          <td>{{ task.notes }}</td>
+          <td>{{ task.status }}</td>
+        </tr>
+      </tbody>
+    </table> -->
+  </section>
+</main>

@@ -1,0 +1,107 @@
+<div class="modal">
+  <div class="modal-content">
+    <span class="close" (click)="closeModal()">&times;</span>
+    <div class="new-task-container">
+      <h2>New Task</h2>
+      <div class="toggle-buttons">
+        <button class="toggle-button active">Open</button>
+        <button class="toggle-button">Closed</button>
+      </div>
+      <form #taskForm="ngForm" (ngSubmit)="onSubmit(taskForm)">
+        <div class="form-group">
+          <input
+            type="text"
+            [(ngModel)]="task.entityName"
+            name="entityName"
+            id="entity-name"
+            placeholder="Entity name"
+          />
+          <input
+            type="date"
+            [(ngModel)]="task.date"
+            id="date"
+            name="date"
+            placeholder="Date"
+          />
+        </div>
+        <div class="form-group">
+          <div class="date-time-picker">
+            <select id="hours" [(ngModel)]="task.time.hour" name="hour">
+              <!-- Hour options: 01 to 12 -->
+              <option *ngFor="let hour of hours" [value]="hour">
+                {{ hour | number : "2.0" }}
+              </option>
+            </select>
+            <select id="minutes" [(ngModel)]="task.time.minute" name="minute">
+              <!-- Minute options: 00 to 59 -->
+              <option *ngFor="let minute of minutes" [value]="minute">
+                {{ minute | number : "2.0" }}
+              </option>
+            </select>
+            <select id="am/pm" [(ngModel)]="task.time.isAM" name="isAM">
+              <!-- AM/PM options -->
+              <option>AM</option>
+              <option>PM</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group" placeholder="Meeting Type">
+          <select id="task-type" [(ngModel)]="task.taskType" name="task-type">
+            <option>Call</option>
+            <option>Meeting</option>
+            <option>Video Call</option>
+            <!-- Add more options as needed -->
+          </select>
+        </div>
+        <div class="form-group">
+          <input
+            type="number"
+            id="phone-number"
+            placeholder="Phone number"
+            pattern="\d*"
+            [(ngModel)]="task.phone"
+            name="phone"
+            required
+            #phone="ngModel"
+          />
+          <div *ngIf="phone.invalid && (phone.dirty || phone.touched)">
+            <small *ngIf="phone.errors?.['required']"
+              >Phone number is required.</small
+            >
+          </div>
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            id="contact-person"
+            placeholder="Contact person"
+            [(ngModel)]="task.contactPerson"
+            name="contactPerson"
+            required
+            #contact="ngModel"
+          />
+          <div *ngIf="contact.invalid && (contact.dirty || contact.touched)">
+            <small *ngIf="contact.errors?.['required']"
+              >Contact Person is required.</small
+            >
+          </div>
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            id="note"
+            placeholder="Note (optional)"
+            [(ngModel)]="task.notes"
+            name="note"
+          />
+        </div>
+        <div class="form-actions">
+          <button type="button" class="cancel-button" (click)="onCancel()">
+            Cancel
+          </button>
+          <button type="submit" class="save-button">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
